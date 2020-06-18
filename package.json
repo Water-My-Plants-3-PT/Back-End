@@ -4,7 +4,9 @@
   "description": "back-end",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch",
+    "server": "nodemon",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +31,6 @@
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {
-    "jest": "^26.0.1",
     "nodemon": "^2.0.4"
   }
 }
