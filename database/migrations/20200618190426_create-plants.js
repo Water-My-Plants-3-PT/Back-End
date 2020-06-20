@@ -8,14 +8,35 @@ exports.up = function(knex) {
         .notNullable()
         .unique();
       tbl
-        .string('password', 255)
+        .string('password', 128)
         .notNullable();
       tbl
-        .integer('phone number', 10)
+        .integer('phoneNumber', 10)
         .notNullable();
     })
+    .createTable('plants', tbl => {
+      tbl.increments('id');
+      tbl
+        .string('nickname', 128)
+        .notNullable()
+        .unique();
+      tbl
+        .string('species')
+        .notNullable()
+        .unique();
+      tbl
+        .integer('h2oFrequency');
+      tbl
+        .integer('user_id')
+        .unsigned()
+        // .notNullable()
+        .references('id')
+        .inTable('users');
+    });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExist('plants');
+  return knex.schema
+    .dropTableIfExists('plants')
+    .dropTableIfExists('users');
 };

@@ -19,8 +19,8 @@ router.post("/register", (req, res) => {
 
     Users.add(credentials)
       .then(user => {
-        const token = genToken(saved);
-        res.status(201).json({ data: user, token });
+        // const token = genToken(saved);
+        res.status(201).json({ data: user });
       })
       .catch(error => {
         res.status(500).json({ message: error.message });
