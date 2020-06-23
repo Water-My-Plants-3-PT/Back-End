@@ -19,7 +19,7 @@ router.post("/register", (req, res) => {
 
     Users.add(credentials)
       .then(user => {
-        // const token = genToken(saved);
+        const token = genToken(saved);
         res.status(201).json({ data: user });
       })
       .catch(error => {
@@ -27,7 +27,7 @@ router.post("/register", (req, res) => {
       });
   } else {
     res.status(400).json({
-      message: "please provide username and password and the password shoud be alphanumeric",
+      message: "please provide username, password and phone number",
     });
   }
 });
