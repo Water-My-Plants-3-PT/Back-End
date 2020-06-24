@@ -25,11 +25,14 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
-    connection: pgConnection,
+    client: 'sqlite3',
+    connection: {
+      filename: './database/plants.db3'
+    },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      }
     },
     migrations: {
       directory: "./database/migrations",
