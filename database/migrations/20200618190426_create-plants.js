@@ -29,7 +29,7 @@ exports.up = function(knex) {
       tbl
         .integer('user_id')
         .unsigned()
-        // .notNullable()
+        .notNullable()
         .references('id')
         .inTable('users');
     });
