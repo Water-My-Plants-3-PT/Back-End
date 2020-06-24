@@ -1,9 +1,50 @@
-// const express = require('express');
-// const router = express.Router();
-// const Plants = require('./plants-model.js');
-// const restricted = require('../auth/restricted-middleware.js');
+const router = require("express").Router();
 
-// // Gets
-// router.get('/', restricted, (req, res) => {
+const Plants = require("./plants-model.js");
+const restricted = require("../auth/restricted-middleware.js");
 
-// })
+
+
+// Get 
+// Get all plants
+router.get("/", restricted, (req, res) => {
+  Plants.find()
+    .then(plants => {
+      res.status(200).json(plants);
+    })
+    .catch(err => res.send(err));
+});
+
+// Get plant by id
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+
+  Plants.findById(id)
+  .then(plant => {
+    if (plant) {
+      res.json(plant);
+    } else {
+      res.status(404).json({ message: 'Could not find plant with given id.' })
+    }
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Failed to get plant' });
+  });
+});
+
+
+//Post
+//Post a plant
+router.post('/', (req, res) => {
+  const plantData = req.body;
+
+  Plants.add(plantData)
+  .then(plant => {
+    res.status(201).json(plant);
+  })
+  .catch (err => {
+    res.status(500).json({ message: 'Failed to create new plant' });
+  });
+});
+
+module.exports = router;
