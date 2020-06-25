@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "back-end",
   "main": "index.js",
-  "scripts": {
+      "scripts": {
     "test": "jest --watch",
     "server": "nodemon",
     "start": "node index.js"

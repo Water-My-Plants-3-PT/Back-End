@@ -7,7 +7,7 @@ const restricted = require("../auth/restricted-middleware.js");
 
 // Get 
 // Get all plants
-router.get("/", restricted, (req, res) => {
+router.get("/", (req, res) => {
   Plants.find()
     .then(plants => {
       res.status(200).json(plants);
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
 
 // Post
 // Post a plant
-router.post('/', restricted, (req, res) => {
+router.post('/', (req, res) => {
   const plantData = req.body;
 
   Plants.add(plantData)
