@@ -1,4 +1,6 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
+// const router = require("express").Router();
 
 const Plants = require("./plants-model.js");
 const restricted = require("../auth/restricted-middleware.js");
@@ -33,7 +35,7 @@ router.get('/:id', (req, res) => {
 
 // Post
 // Post a plant
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
   const plantData = req.body;
 
   Plants.add(plantData)
@@ -41,7 +43,7 @@ router.post('/', (req, res) => {
     res.status(201).json(plant);
   })
   .catch (err => {
-    res.status(500).json({ message: 'Failed to create new plant' });
+    res.status(500).json({ message: 'Failed to create new plant', err });
   });
 });
 
