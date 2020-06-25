@@ -3,8 +3,6 @@ const router = require("express").Router();
 const Plants = require("./plants-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 
-
-
 // Get 
 // Get all plants
 router.get("/", restricted, (req, res) => {
