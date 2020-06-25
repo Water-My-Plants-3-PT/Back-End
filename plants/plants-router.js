@@ -31,8 +31,8 @@ router.get('/:id', (req, res) => {
 });
 
 
-//Post
-//Post a plant
+// Post
+// Post a plant
 router.post('/', (req, res) => {
   const plantData = req.body;
 
@@ -44,5 +44,34 @@ router.post('/', (req, res) => {
     res.status(500).json({ message: 'Failed to create new plant' });
   });
 });
+
+
+// Update
+// Update plant
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+
+  Plants.update(id, req.body).then(action => {
+    res.status(200).json({ success: 'Plant Updated!', info: req.body });
+  });
+}); 
+
+// Delete
+// Delete plant
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  Plants.get(id).then(plant => {
+    action
+      ? Plants.remove(id).then(deleted => {
+          deleted
+            ? res
+                .status(200)
+                .json({ success: `Plant ${id} was deleted!`, info: plant })
+            : null;
+        })
+      : null;
+  });
+}); 
 
 module.exports = router;
