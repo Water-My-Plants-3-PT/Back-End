@@ -71,30 +71,27 @@ router.put('/:id', (req, res) => {
   });
 });
 
-// router.put("/:id", (req, res) => {
-//   const { id } = req.params;
-
-//   Plants.update(id, req.body).then(action => {
-//     res.status(200).json({ success: 'Plant Updated!', info: req.body }, action);
-//   });
-// }); 
 
 // Delete
 // Delete plant
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
 
-  Plants.get(id).then(plant => {
-    action
-      ? Plants.remove(id).then(deleted => {
-          deleted
-            ? res
-                .status(200)
-                .json({ success: `Plant ${id} was deleted!`, info: plant })
-            : null;
-        })
-      : null;
+router.delete('/:id', (req, res) => {
+  Plants.remove(req.params.id)
+
+  .then(plant => {
+    if (plant > 0) {
+      res.status(200).json({ message: 'The plant died' });
+    } else {
+      res.status(404).json({ message: 'The plant could not be found' });
+    }
+  })
+  .catch(error => {
+    // log error to database
+    console.log(error);
+    res.status(500).json({
+      message: 'Error removing the hdead plant',
+    });
   });
-}); 
+});
 
 module.exports = router;

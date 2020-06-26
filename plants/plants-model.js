@@ -28,7 +28,7 @@ function add(plantData) {
   return db('plants').insert(plantData);
 }
 
-function update(changes, id) {
+function update(id, changes) {
   return db('plants').where({ id }).update(changes);
 }
 
