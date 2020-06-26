@@ -50,13 +50,34 @@ router.post('/', (req, res) => {
 
 // Update
 // Update plant
-router.put("/:id", (req, res) => {
-  const { id } = req.params;
 
-  Plants.update(id, req.body).then(action => {
-    res.status(200).json({ success: 'Plant Updated!', info: req.body }, action);
+router.put('/:id', (req, res) => {
+  const changes = req.body;
+
+  Plants.update(req.params.id, changes)
+  .then(plant => {
+    if (plant) {
+      res.status(200).json(plant);
+    } else {
+      res.status(404).json({ message: 'The plant could not be found' });
+    }
+  })
+  .catch(error => {
+    // log error to database
+    console.log(error);
+    res.status(500).json({
+      message: 'Error updating plant',
+    });
   });
-}); 
+});
+
+// router.put("/:id", (req, res) => {
+//   const { id } = req.params;
+
+//   Plants.update(id, req.body).then(action => {
+//     res.status(200).json({ success: 'Plant Updated!', info: req.body }, action);
+//   });
+// }); 
 
 // Delete
 // Delete plant
