@@ -54,7 +54,7 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
 
   Plants.update(id, req.body).then(action => {
-    res.status(200).json({ success: 'Plant Updated!', info: req.body });
+    res.status(200).json({ success: 'Plant Updated!', info: req.body }, action);
   });
 }); 
 
