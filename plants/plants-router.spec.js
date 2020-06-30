@@ -19,7 +19,7 @@ describe('testing API end points', () => {
 
         const response = await request.post('/api/plants');
 
-        expect(response.status).toBe(201);
+        expect(newPlant).toHaveLength(1);
       });
     });
   });
