@@ -56,7 +56,7 @@ router.put('/:id', (req, res) => {
   Plants.update(req.params.id, changes)
   .then(plant => {
     if (plant) {
-      res.status(200).json({ message: "Plant updated", }, plant);
+      res.status(200).json({ message: "Plant updated", plant });
     } else {
       res.status(404).json({ message: 'The plant could not be found' });
     }
@@ -65,7 +65,7 @@ router.put('/:id', (req, res) => {
     // log error to database
     console.log(error);
     res.status(500).json({
-      message: 'Error updating plant',
+      message: 'Error updating plant'
     });
   });
 });
